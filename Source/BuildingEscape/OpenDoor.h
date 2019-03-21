@@ -35,14 +35,14 @@ private:
 	float MassThreshold = 29.9f;
 
 	UPROPERTY(EditAnywhere)
-	class ATriggerVolume* PressurePlate;
+	class ATriggerVolume* PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 0.5f;
 
 	float LastDoorOpenTime;
 
-	AActor* Owner;
+	AActor* Owner = nullptr;
 
 	// Returns total mass in kg
 	float GetTotalMassOfActorsOnPlate();
