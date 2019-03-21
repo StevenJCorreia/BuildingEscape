@@ -26,13 +26,17 @@ void UOpenDoor::BeginPlay()
 	}
 }
 
+// Deprecated function
 void UOpenDoor::OpenDoor()
 {
-	Owner->SetActorRotation(FRotator(NULL, OpenAngle, NULL));
+	// 75 degrees for open angle
+	Owner->SetActorRotation(FRotator(NULL, 75.f, NULL));
 }
 
+// Deprecated function
 void UOpenDoor::CloseDoor()
 {
+	// Resets door position
 	Owner->SetActorRotation(FRotator(NULL, NULL, NULL));
 }
 
@@ -44,14 +48,11 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	/// Poll trigger volume
 	if (GetTotalMassOfActorsOnPlate() > MassThreshold)
 	{
-		OpenDoor();
-		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
+		OnOpen.Broadcast();
 	}
-
-	/// Check if its time to close door
-	if (GetWorld()->GetTimeSeconds() - LastDoorOpenTime > DoorCloseDelay)
+	else
 	{
-		CloseDoor();
+		OnClose.Broadcast();
 	}
 }
 
