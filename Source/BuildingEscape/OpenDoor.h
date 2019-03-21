@@ -28,8 +28,11 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	float OpenAngle = 120.f;
+	UPROPERTY(EditAnywhere)
+	float OpenAngle = 75.f;
+
+	UPROPERTY(EditAnywhere)
+	float MassThreshold = 29.9f;
 
 	UPROPERTY(EditAnywhere)
 	class ATriggerVolume* PressurePlate;
@@ -39,6 +42,8 @@ private:
 
 	float LastDoorOpenTime;
 
-	AActor* ActorThatOpens;
 	AActor* Owner;
+
+	// Returns total mass in kg
+	float GetTotalMassOfActorsOnPlate();
 };
